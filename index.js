@@ -3,7 +3,7 @@ const cors = require('cors');
 require('dotenv').config()
 const mongoose = require('mongoose');
 const app = express();
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 5000;
 const User = require('./models/user');
 const Cart = require('./models/carts');
 // import axios from 'axios';
@@ -11,7 +11,7 @@ const Cart = require('./models/carts');
 
 
 mongoose.connect(process.env.URI)
-  .then((result)=> app.listen(3000))
+  .then((result)=> app.listen(PORT))
   .catch((err)=> console.log("FAILED TO CONNECT"));
   
 
@@ -136,6 +136,6 @@ app.get('/api/profile/', async (req, res) => {
 });
 
 // Start the server
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-});
+// app.listen(PORT, () => {
+//   console.log(`Server running on http://localhost:${PORT}`);
+// });
