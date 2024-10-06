@@ -3,10 +3,10 @@ const cors = require('cors');
 require('dotenv').config()
 const mongoose = require('mongoose');
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 9000;
 const User = require('./models/user');
 const Cart = require('./models/carts');
-import axios from 'axios';
+const axios = require('axios');
 
 
 
@@ -78,7 +78,7 @@ app.get('/api/home/', async (req, res) => {
 
   // Try mongoDB call to grab userId using userName
   try {
-    const findResult = await MyCollection.findOne({}, options);
+    const findResult = await getUser(userName);
     if(findResult != null) {
       console.log(findResult);
       // make the contract
@@ -95,7 +95,7 @@ app.get('/api/home/', async (req, res) => {
   
   // this is the response you are sending back (basically return in C#)
   // THIS LINE OF CODE WORKS WITH OLD FRONTEND
-  res.send(`Cart ID is: ${cardId}`);
+  //res.json(`Cart ID is: ${cardId}`);
 
   // get user id then build contract
 
@@ -103,15 +103,16 @@ app.get('/api/home/', async (req, res) => {
 
 
 app.get('/api/profile/', async (req, res) => {
-  const {cardId, userName} = req.query; // Access the parameter value
+  const {userName} = req.query; // Access the parameter value
   
+  console.log(req.query)
   const options = {
     projection: {userName: userName}
   }
 
   // Try mongoDB call to grab userId using userName
   try {
-    const findResult = await MyCollection.findOne({}, options);
+    const findResult = await getUser(userName);
     if(findResult != null) {
       console.log(findResult);
       // make the contract
