@@ -3,10 +3,10 @@ const cors = require('cors');
 require('dotenv').config()
 const mongoose = require('mongoose');
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 8000;
 const User = require('./models/user');
 const Cart = require('./models/carts');
-import axios from 'axios';
+// import axios from 'axios';
 
 
 
